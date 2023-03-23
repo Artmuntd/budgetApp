@@ -7,28 +7,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/budget")
-public class BudgetController {
+@RequestMapping("/vacation")
+public class VacationController {
 
      private final BudegetSevice budegetSevice;
 
-    public BudgetController(BudegetSevice budegetSevice) {
+    public VacationController(BudegetSevice budegetSevice) {
         this.budegetSevice = budegetSevice;
     }
 
-    @GetMapping("/daily")
-    public  int dailyBudget(){
-        return budegetSevice.getDailyBudget();
-    }
-    @GetMapping("/balance")
-    public  int balance(){
-        return  budegetSevice.getBalance();
-    }
-    @GetMapping("/vacation")
+    @GetMapping("")
     public  int vacationBonus(@RequestParam int vacationDays){
         return budegetSevice.getVacatoinBonus(vacationDays);
     }
-    @GetMapping("/vacation/salary")
+    @GetMapping("/salary")
     public  int salaryWithVacation(@RequestParam int vacationDays, @RequestParam int workingDays, @RequestParam int vacWorkDays) {
         return  budegetSevice.getSalaryWithVacation(vacationDays,vacWorkDays,workingDays);
     }
