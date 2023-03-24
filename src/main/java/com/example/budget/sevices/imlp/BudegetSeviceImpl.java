@@ -2,6 +2,7 @@ package com.example.budget.sevices.imlp;
 
 import com.example.budget.model.Transaction;
 import com.example.budget.sevices.BudegetSevice;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -90,6 +91,7 @@ public class BudegetSeviceImpl implements BudegetSevice {
         }
         return  sum;
     }
+
     @Override
     public  int getVacatoinBonus (int daysCount){
 

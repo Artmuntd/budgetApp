@@ -2,12 +2,14 @@ package com.example.budget.controller;
 
 import com.example.budget.model.Transaction;
 import com.example.budget.sevices.BudegetSevice;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/transaction")
+@Tag(name = "Транзакции", description = "GRUD операции и другие")
 public class TransactionController {
     private final BudegetSevice budegetSevice;
 
