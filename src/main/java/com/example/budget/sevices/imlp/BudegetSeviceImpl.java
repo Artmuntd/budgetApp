@@ -9,11 +9,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @Service
 public class BudegetSeviceImpl implements BudegetSevice {
@@ -122,6 +125,15 @@ public class BudegetSeviceImpl implements BudegetSevice {
      int salary = SALARY /  workingDaysInMonth * (workingDaysInMonth - vacationDaysCount);
      return salary + getVacatoinBonus(vacationDaysCount);
 
+    }
+    public Path creatMonthLyReport(Month month) throws IOException {
+       LinkedHashMap<Long, Transaction> monthlyTransactions  = transactions.getOrDefault(month, new LinkedHashMap<>());
+        Path path= fileService.creatTempFile("monthlyReport");
+       for(Transaction transaction: monthlyTransactions.values()); {
+           try (Writer writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)){
+               writer.append(transactions.getCategory() + transactions.getS);
+           }
+        }
     }
     private void  saveToFile(){
         try {

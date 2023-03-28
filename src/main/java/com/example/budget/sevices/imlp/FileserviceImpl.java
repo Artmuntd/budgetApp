@@ -4,6 +4,7 @@ import com.example.budget.sevices.FileService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,6 +27,18 @@ public class FileserviceImpl  implements FileService {
         }
     }
     @Override
+    public Path creatTempFile(String suffix){
+        try {
+          return   Files.createTempFile(Path.of(dataFilePath), "tempFile", suffix);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+@Override
+    public File getDatafile(){
+        return  new File(dataFilePath + "/" + dataFileName);
+    }
+    @Override
     public String readFromFile(){
         try {
            return  Files.readString(Path.of(dataFilePath, dataFileName));
@@ -33,8 +46,8 @@ public class FileserviceImpl  implements FileService {
             throw new RuntimeException(e);
         }
     }
-
-    private boolean CleanDataFile() {
+ @Override
+    public boolean CleanDataFile() {
 
         try {
             Path path = Path.of(dataFilePath, dataFileName);
